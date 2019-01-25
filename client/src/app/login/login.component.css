@@ -1,0 +1,13 @@
+.card{
+    padding: 25px;
+    position: relative;
+    top: 150px;
+    margin: 0 auto;
+}
+body{
+	background-image: url(/src/images/Mean-Stack.jpg) !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}

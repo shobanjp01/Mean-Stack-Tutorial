@@ -1,59 +1,59 @@
-<div class="col-lg-4">
+<div class="col-lg-4 card">
     <h2>{{registerTitle}}</h2>
     <form name="form" (ngSubmit)="f.form.valid && newUser()" #f="ngForm" novalidate>   
     <!-- <form (submit)="newUser()"> -->
        <div class="form-group">
           <label>Name</label>
-          <input type="text" [(ngModel)]="profile.name" minlength="4" name="name" #names="ngModel" class="form-control" required> 
+          <input type="text" [(ngModel)]="profile.name" placeholder="Fullname" minlength="4" name="name" #names="ngModel" class="form-control" required> 
        </div>
        <div class="form-group">
             <div *ngIf="names.invalid && names.touched"
                 class="alert alert-danger">
               <div *ngIf="names.errors.required">
-                Name is required.
+                * Name is required.
               </div>                        
               <div *ngIf="names.errors.minlength">
-                  Name must be at least 4 characters long.
+               * Name must be at least 4 characters long.
                </div>                   
             </div>
           </div>
        <div class="form-group">
           <label>Email</label>
-          <input type="email" [(ngModel)]="profile.email" name="email" class="form-control" #emailing="ngModel" required email> 
+          <input type="email" [(ngModel)]="profile.email" name="email" placeholder="Email" class="form-control" #emailing="ngModel" required email> 
        </div>
 
        <div class="form-group">
             <div *ngIf="emailing.invalid &&  emailing.touched"
                 class="alert alert-danger">
               <div *ngIf="emailing.errors.required">
-                Email is required.
+                * Email is required.
               </div>            
               <div  *ngIf="emailing.invalid">
-                  Enter email in xxxx@yy.zzz format.
+                  * Enter email in xxxx@yy.zzz format.
               </div>              
             </div>
           </div>
        <div class="form-group">
           <label>Age</label>
-          <input type="text" [(ngModel)]="profile.age" name="age" #ages="ngModel"  maxlength="3" class="form-control" required > 
+          <input type="text" [(ngModel)]="profile.age" name="age" #ages="ngModel" placeholder="Age"  maxlength="3" class="form-control" required > 
        </div>
        <div class="form-group">
             <div *ngIf="ages.invalid &&  ages.touched"
                 class="alert alert-danger">
                 <div *ngIf="ages.errors.required">
-                     Age is required.
+                     * Age is required.
                    </div> 
                 <div *ngIf="ages.invalid&&ages.dirty">
-                     Only numbers allowed.
+                     * Only numbers allowed.
                   </div>                         
               <div *ngIf="ages.errors.maxlength">
-                  Age must be max 4 digits.
+                  * Age must be max 4 digits.
                </div>       
             </div>
           </div>
        <div class="form-group">
           <label>Contact</label>
-          <input type="text" [(ngModel)]="profile.mobile" name="mobile" maxlength="10" minlength="10" #contacts="ngModel" pattern="[1-9]{1}[0-9]{9}"   class="form-control" required> 
+          <input type="text" [(ngModel)]="profile.mobile" name="mobile" placeholder="Mobile" maxlength="10" minlength="10" #contacts="ngModel" pattern="[1-9]{1}[0-9]{9}"   class="form-control" required> 
        </div>
         <div class="form-group">
            <!-- <div *ngIf="contacts.invalid&&contacts.dirty" class="alert alert-danger">
@@ -62,35 +62,35 @@
             <div *ngIf="contacts.invalid && contacts.touched"
                 class="alert alert-danger">
                 <div *ngIf="contacts.errors.required">
-                     Contact is required.
+                     * Contact is required.
                    </div>  
                 <div *ngIf="contacts.invalid&&contacts.dirty">
-                     Only numbers allowed.
+                     * Only numbers allowed.
                   </div>                                    
               <div *ngIf="contacts.errors.maxlength||contacts.errors.minlength">
-                  Contact must be only 10 digits.
+                  * Contact must be only 10 digits.
                </div>                   
             </div>
           </div>
        <div class="form-group">
           <label>Password</label>
-          <input type="password" [(ngModel)]="profile.password" id="myInput" name="password" #x #passwording="ngModel" minlength="4" class="form-control" required><br>
+          <input type="password" [(ngModel)]="profile.password" id="myInput" placeholder="Password" name="password" #x #passwording="ngModel" minlength="4" class="form-control" required><br>
           <input type="checkbox" (click)="x.type=x.type=='password'?'text':'password'" >&nbsp;&nbsp;Show Password
        </div>
        <div class="form-group">
             <div *ngIf="passwording.invalid &&  passwording.touched"
                 class="alert alert-danger">
               <div *ngIf="passwording.errors.required">
-                Password is required.
+                * Password is required.
               </div>
               <div *ngIf="passwording.errors.minlength">
-                 Password must be at least 4 characters long.
+                 * Password must be at least 4 characters long.
               </div>                   
             </div>
           </div>
-       <div>
-          <input type="submit" value={{btnTitle}} class="btn btn-success registerSubmit" [disabled]="f.form.pristine || f.form.invalid">
+       <div>          
           <input type="button" value="Already Registered?Click here to login" class="btn btn-link loginLink" (click)="registeredUser()">
+          <input type="submit" value={{btnTitle}} class="btn btn-success registerSubmit" [disabled]="f.form.pristine || f.form.invalid">
        </div>
     </form>
  </div>

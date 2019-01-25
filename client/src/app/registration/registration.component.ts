@@ -25,6 +25,7 @@ export class RegistrationComponent implements OnInit {
 
 
   constructor(private registrationService:RegistrationService,private router:Router,private editProfile:EditProfile,private profileService:ProfileService) {
+    
     this.editProfile.setNameMethodCalled.subscribe((res)=>{
       console.log(res);    
       $('.registerSubmit').removeAttr('disabled');      
@@ -37,13 +38,21 @@ export class RegistrationComponent implements OnInit {
       console.log(this.profile); 
 
     })
+  
    }
 
-  ngOnInit() {
+  ngOnInit() {    
+    if(sessionStorage.getItem('email')){
+      this.profileService.getProfile(sessionStorage.getItem('id')).subscribe((res)=>{
+        this.editProfile.editProfile(res);
+      })
+    }
+    else{
     $('.logout,.home,.userName').hide();
     this.registerTitle="Registration";
     this.btnTitle="Register";
     $('.loginLink').show();
+    }
 
   }
 

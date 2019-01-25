@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(private loginService:LoginService,private router:Router,private profileService:ProfileService) { }
 
   ngOnInit() {
-    $('.logout,.home').hide();
+    $('.logout,.home,.userName').hide();
   }
 
   newUser(){
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(login)
     .subscribe(res=>{
       if(res.length>0){  
-        $('.logout,.home').show();
+        $('.logout,.home,.userName').show();
         this.user=res[0].name;   
         console.log(res[0])  ;
         sessionStorage.setItem('id',res[0]._id);   

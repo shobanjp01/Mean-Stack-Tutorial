@@ -4,28 +4,28 @@
   <form name="form" (ngSubmit)="f.form.valid && addContact()" #f="ngForm" novalidate>     
     <div class="form-group">
       <label>First Name</label>
-      <input type="text" [(ngModel)]="new.firstName" minlength="4" name="firstName" #firstNames="ngModel" class="form-control" required> 
+      <input type="text" [(ngModel)]="new.firstName" placeholder="Firstname" minlength="4" name="firstName" #firstNames="ngModel" class="form-control" required> 
     </div>
     <div class="form-group">
         <div *ngIf="firstNames.invalid && firstNames.touched"
             class="alert alert-danger">
           <div *ngIf="firstNames.errors.required">
-            Firstname is required.
+            * Firstname is required.
           </div>                        
           <div *ngIf="firstNames.errors.minlength">
-            Firstname must be at least 4 characters long.
+            * Firstname must be at least 4 characters long.
            </div>                   
         </div>
       </div>
     <div class="form-group">
       <label>Last Name</label>
-      <input type="text" [(ngModel)]="new.lastName" name="lastName" #lastNames="ngModel" class="form-control" required>
+      <input type="text" [(ngModel)]="new.lastName" name="lastName" placeholder="Lastname" #lastNames="ngModel" class="form-control" required>
     </div>
     <div class="form-group">
         <div *ngIf="lastNames.invalid && lastNames.touched"
             class="alert alert-danger">
           <div *ngIf="lastNames.errors.required">
-            Lastname is required.
+            * Lastname is required.
           </div>                        
                             
         </div>
@@ -33,19 +33,19 @@
 
     <div class="form-group">
       <label>Contact</label>
-      <input type="text" [(ngModel)]="new.contact" name="contact" maxlength="10" minlength="10" #contacts="ngModel" pattern="[1-9]{1}[0-9]{9}" class="form-control" required>
+      <input type="text" [(ngModel)]="new.contact" name="contact" placeholder="Mobile" maxlength="10" minlength="10" #contacts="ngModel" pattern="[1-9]{1}[0-9]{9}" class="form-control" required>
     </div>
     <div class="form-group">
          <div *ngIf="contacts.invalid && contacts.touched"
              class="alert alert-danger">
              <div *ngIf="contacts.errors.required">
-                  Contact is required.
+                  * Contact is required.
                 </div>  
              <div *ngIf="contacts.invalid&&contacts.dirty">
-                  Only numbers allowed.
+                  * Only numbers allowed.
                </div>                                    
            <div *ngIf="contacts.errors.maxlength||contacts.errors.minlength">
-               Contact must be only 10 digits.
+               * Contact must be only 10 digits.
             </div>                   
          </div>
        </div>

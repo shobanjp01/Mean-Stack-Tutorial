@@ -1,69 +1,54 @@
-<div class="col-lg-4">
+<div class="">
+  <div class="col-lg-4 card">
     <h2>Login</h2>
+    <br>
     <form name="form" (ngSubmit)="f.form.valid && login(email,password)" #f="ngForm" novalidate>
-      <div class="form-group">
-        <label>User</label>
-        <input type="email" [(ngModel)]="email"  name="email" class="form-control" #emailing="ngModel" email required> 
-      </div>
+        <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
+            </div>
+            <input type="email" [(ngModel)]="email" placeholder="username" name="email" class="form-control" #emailing="ngModel" email required> 
+          </div>
+      
       <div class="form-group">
           <label *ngIf="emailing.invalid && emailing.touched"
               class="alert alert-danger">
             <div *ngIf="emailing.errors.required">
-              Username is required.
+              * Username is required.
             </div>            
             <div  *ngIf="emailing.invalid">
-                Enter username in xxxx@yy.zzz format.
+             * Enter username in xxxx@yy.zzz format.
             </div>
             <!-- <div *ngIf="email.errors.forbiddenName">
               Name cannot be Bob.
             </div> -->
           </label>
         </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" [(ngModel)]="password" minlength="4" name="password" #passwording="ngModel" class="form-control" required>
-      </div>
+     
+      <div class="input-group mb-4">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+          </div>
+          <input type="password" [(ngModel)]="password" minlength="4" placeholder="password" name="password" #passwording="ngModel" class="form-control" required>
+        </div>
+
       <div class="form-group">
           <label *ngIf="passwording.invalid &&  passwording.touched"
               class="alert alert-danger">
             <div *ngIf="passwording.errors.required">
-              Password is required.
+              * Password is required.
             </div>
             <div *ngIf="passwording.errors.minlength">
-               Password must be at least 4 characters long.
+               * Password must be at least 4 characters long.
             </div>                   
           </label>
         </div>
-      <div>
-        <input type="submit" value="Submit" class="btn btn-success" [disabled]="f.form.pristine || f.form.invalid">
-        <input type="button" value="New User? Register here" class="btn btn-link" (click)="newUser()">
+      <div>        
+        <input type="button"  value="New User? Register here" class="btn btn-link" (click)="newUser()">
+        <input type="submit" style="float:right" value="Login" class="btn btn-success" [disabled]="f.form.pristine || f.form.invalid">
       </div>
     </form>
   </div>
-
-  <!-- <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-      <div class="form-group">
-        <input id="name" name="name" class="form-control"
-        required minlength="4" appForbiddenName="bob"
-        [(ngModel)]="data.name" #name="ngModel"/>
-      </div>
-      <div class="form-group">
-        <div *ngIf="name.invalid && (name.dirty || name.touched)"
-            class="alert alert-danger">
-          <div *ngIf="name.errors.required">
-            Name is required.
-          </div>
-          <div *ngIf="name.errors.minlength">
-            Name must be at least 4 characters long.
-          </div>
-          <div *ngIf="name.errors.forbiddenName">
-            Name cannot be Bob.
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" [disabled]="f.form.pristine || f.form.invalid">Add Name</button>
-      </div>
-    </form>
-   -->
+</div>
+ 
   
