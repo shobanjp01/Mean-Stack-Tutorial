@@ -1,16 +1,23 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import {ProfileService,EditProfile} from '../app/profile.service';
-import { identifierModuleUrl } from '@angular/compiler';
+
 
 import { Idle } from 'idlejs/dist';
+import { longStackSupport } from 'q';
 
 declare var jquery:any;
 declare var $ :any;
 const idle = new Idle()
   .whenNotInteractive()
-  .within(60)
-  .do(() => console.log('IDLE'))
+  .within(5)
+  .do(() => {
+     console.log('IDLE');
+     sessionStorage.clear();
+     console.log(sessionStorage.getItem('email')); 
+     $('.logout').hide();     
+     window.location.href = "/login";
+  })
   .start();
 
 @Component({
@@ -26,7 +33,6 @@ export class AppComponent {
       this.user=res.name;
       this.id=res._id;
     })
-
   }
   title = 'client';
   user=sessionStorage.getItem('email');
