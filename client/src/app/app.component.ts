@@ -3,8 +3,15 @@ import {Router} from '@angular/router';
 import {ProfileService,EditProfile} from '../app/profile.service';
 import { identifierModuleUrl } from '@angular/compiler';
 
+import { Idle } from 'idlejs/dist';
+
 declare var jquery:any;
 declare var $ :any;
+const idle = new Idle()
+  .whenNotInteractive()
+  .within(60)
+  .do(() => console.log('IDLE'))
+  .start();
 
 @Component({
   selector: 'app-root',

@@ -20,6 +20,8 @@ declare var $ :any;
 export class ContactsComponent implements OnInit {
 edit={};
 new={};
+btnName:String;
+
 contactsLists:Contacts[];
 
 editBtn:Boolean;
@@ -36,48 +38,55 @@ updateBtn:Boolean;
     this.contactService.getAllContact()
     .subscribe(contacts=>{
       this.contactsLists=contacts;
+      $('#contactTable').DataTable().destroy();
       setTimeout(function(){
         $('#contactTable').DataTable({
           responsive: true
         });
         $('#contactTable').wrap('<div class="dataTables_scroll" />');
-        }, 50);
-      
-      // this.editBtn=false;
-      // this.updateBtn=true;      
+        }, 50);         
     })
   }
 
   addContact(){
-    const newContact=this.new;
-    this.contactService.addContact(newContact)
-    .subscribe(res=>{
-      this.contactsLists.push(res);
-      this.ngOnInit();
-      alert('Added Succesfully');
-      this.new={};
-    })
+    this.edit={};
+    this.btnName="Add";
   }
+ 
 
   editContact(id:any){
+    this.btnName="Update";
     //this.editBtn=true;
     this.contactService.getContact(id)
     .subscribe(contacts=>{      
-      this.edit=contacts[0];      
+      this.edit=contacts[0];  
+      console.log(this.edit)    ;
     })    
   }
   
-  updateContact(){
-    const updatedContact=this.edit;
+  updateContact(type){
+    if(type=="Add"){
+      const newContact=this.edit;
+      this.contactService.addContact(newContact)
+      .subscribe(res=>{
+        this.contactsLists.push(res);
+        this.ngOnInit();
+        alert('Added Succesfully');        
+      })
+    }
+    else{
+      const updatedContact=this.edit;
     this.contactService.updateContact(updatedContact)
     .subscribe(res=>{
       this.contactsLists.push(res);
       this.ngOnInit();      
       //var element = document.getElementById("modalClose") as any;
-      //element.click();
-      $('#modalClose').click();
+      //element.click();     
       alert('Updated Succesfully');
     })   
+    }    
+    $('#modalClose').click();
+    this.edit={};
   }
 
   deleteContact(id:any){
