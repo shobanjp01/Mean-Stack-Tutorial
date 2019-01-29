@@ -43,7 +43,7 @@ updateBtn:Boolean;
         $('#contactTable').DataTable({
           responsive: true
         });
-        $('#contactTable').wrap('<div class="dataTables_scroll" />');
+        //$('#contactTable').wrap('<div class="dataTables_scroll" />');
         }, 50);         
     })
   }
@@ -97,8 +97,15 @@ updateBtn:Boolean;
     .subscribe(res=>{
       if(res.n==1){
         for(var i=0;i<contacts.length;i++){
-          if(contacts[i]._id==id){
-            contacts.splice(i,1);
+          if(contacts[i]._id==id){            
+            contacts.splice(i,1); 
+            $('#contactTable').DataTable().destroy();
+            setTimeout(function(){
+              $('#contactTable').DataTable({
+                responsive: true
+              });
+              //$('#contactTable').wrap('<div class="dataTables_scroll" />');
+              }, 50);               
             alert("Deleted Successfully");
           }
         }
