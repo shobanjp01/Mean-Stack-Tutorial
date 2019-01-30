@@ -57,7 +57,8 @@ updateBtn:Boolean;
     this.btnName="Update";
     //this.editBtn=true;
     this.contactService.getContact(id)
-    .subscribe(contacts=>{      
+    .subscribe(contacts=>{   
+      console.log(contacts[0]);
       this.edit=contacts[0];  
       console.log(this.edit)    ;
     })    
@@ -65,7 +66,8 @@ updateBtn:Boolean;
   
   updateContact(type){
     if(type=="Add"){
-      const newContact=this.edit;
+
+      const newContact=this.edit;      
       this.contactService.addContact(newContact)
       .subscribe(res=>{
         this.contactsLists.push(res);
@@ -86,6 +88,7 @@ updateBtn:Boolean;
     })   
     }    
     $('#modalClose').click();
+    //$('#myModal').modal('open')
     this.edit={};
   }
 
