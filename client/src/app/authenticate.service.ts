@@ -10,8 +10,8 @@ export class AuthenticateService implements CanActivate {
   constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (sessionStorage.getItem('email')) {
-      console.log(sessionStorage.getItem('email'));
+    if (sessionStorage.getItem('name')) {
+      console.log(sessionStorage.getItem('name'));
         // logged in so return true
         console.log("User Exist");
         return true;

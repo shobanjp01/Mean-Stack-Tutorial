@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http,Headers} from '@angular/http'
+import {Http,Headers} from '@angular/http';
 import {Logins} from './contact';
 import 'rxjs/add/operator/map';
 
@@ -14,6 +14,12 @@ export class LoginService {
     var headers=new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:3000/api/login',login,{headers:headers})
+    .map(res=>res.json());
+  }  
+  logout(logout){
+    var headers=new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/api/logout',logout,{headers:headers})
     .map(res=>res.json());
   }  
 }

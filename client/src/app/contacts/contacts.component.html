@@ -55,13 +55,13 @@
   </form>
 </div> -->
 
-<div class="col-lg-12 text-center ">
+<div class="col-lg-12">
   <div class="row">
   <div class="col-lg-7">
       <h2>Contact List</h2>
   </div>
   <div class="col-lg-5">
-      <input type="button" value="Add New" class="btn btn-success" (click)="addContact()" data-toggle="modal" data-target="#myModal">
+      <button  class="btn btn-success btn-sm" style="float:right" (click)="addContact()" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle"> New Contact</i></button>
   </div>
 </div>
   <table class="table  table-hover " id="contactTable">
@@ -83,8 +83,14 @@
           <td> {{contact.lastName}}</td>
           <td>{{contact.contact}}</td>
           <td>
-            <input type="button" [hidden]="editBtn" class="btn btn-primary btn-sm editBtn" data-toggle="modal" data-target="#myModal" (click)="editContact(contact._id,content)" value="Edit">&nbsp;&nbsp;                  
-            <input type="button" class="btn btn-danger btn-sm" (click)="deleteContact(contact._id)" value="Delete"></td>
+            <span>
+              <a class="editBtn fa fa-edit fa-lg" (click)="editContact(contact._id,content)" data-toggle="modal" data-target="#myModal"></a>
+            </span>
+            <span>
+              <a class="deleteBtn fa fa-trash fa-lg" (click)="deleteContact(contact._id)" ></a>
+            </span>
+            <!-- <input type="button" [hidden]="editBtn" class="btn btn-primary btn-sm editBtn" data-toggle="modal" data-target="#myModal" (click)="editContact(contact._id,content)" value="Edit">&nbsp;&nbsp;                  
+            <input type="button" class="btn btn-danger btn-sm" (click)="deleteContact(contact._id)" value="Delete"></td> -->
         </tr>
       </tbody>
    

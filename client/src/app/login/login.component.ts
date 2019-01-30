@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         this.user=res[0].name;   
         console.log(res[0])  ;
         sessionStorage.setItem('id',res[0]._id);   
-        sessionStorage.setItem('email',res[0].name);  
+        sessionStorage.setItem('name',res[0].name);  
         this.profileService.setName(res[0]);             
         this.router.navigate(['contact']);      
       }

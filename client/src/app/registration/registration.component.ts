@@ -14,11 +14,7 @@ declare var $ :any;
   providers:[RegistrationService]
 })
 export class RegistrationComponent implements OnInit {
-  name:String;
-  age:Number;
-  mobile:String;
-  email:String;
-  password:String;
+  
   registerTitle:String;
   profile={};
   btnTitle:String;
@@ -29,20 +25,17 @@ export class RegistrationComponent implements OnInit {
     this.editProfile.setNameMethodCalled.subscribe((res)=>{
       console.log(res);    
       $('.registerSubmit').removeAttr('disabled');      
-      this.profile=res[0];
-      //this.profileService.setName(res[0].name);
+      this.profile=res[0];    
       this.registerTitle="Personal Detail";
       this.btnTitle="Update";
       $('.logout').show();
       $('.loginLink').hide();
       console.log(this.profile); 
-
-    })
-  
+    });  
    }
 
   ngOnInit() {    
-    if(sessionStorage.getItem('email')){
+    if(sessionStorage.getItem('name')){
       this.profileService.getProfile(sessionStorage.getItem('id')).subscribe((res)=>{
         this.editProfile.editProfile(res);
       })
@@ -53,29 +46,16 @@ export class RegistrationComponent implements OnInit {
     this.btnTitle="Register";
     $('.loginLink').show();
     }
-
   }
 
   registeredUser(){
     this.router.navigate(['login']);
   }
   
-  newUser(){
-    // const newUser={
-    //   name:this.name,
-    //   age:this.age,
-    //   email:this.email,
-    //   mobile:this.mobile,
-    //   password:this.password
-     
-    // }
-   
+  newUser(){      
     console.log(this.profile);
-
     this.registrationService.registration(this.profile)
-    .subscribe(res=>{
-      //this.contactsLists.push(res);
-     // this.ngOnInit();
+    .subscribe(res=>{     
       alert('Registered Succesfully');
       this.router.navigate(['login']);
     });

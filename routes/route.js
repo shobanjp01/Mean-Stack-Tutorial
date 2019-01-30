@@ -43,10 +43,23 @@ router.post('/login',(req,res,next)=>{
 // Get current user 
     Registration.find({email:req.body.email,password:req.body.password},(err,docs)=>{
         console.log(docs);  
-        store.set('user',docs);      
+        store.set('user',docs[0]);      
         res.json(docs);
     });    
 });
+
+router.post('/logout',(req,res,next)=>{   
+    // Get current user
+    let json=store.get('user');
+   // console.log(req.body.id+ " , "+json._id)
+        if((req.body.id)==json._id){
+            store.clearAll();
+            res.json({"message":"Loggedout Successfully","status":true});
+        }
+        else{
+            res.json({"message":"Logout Fail","status":false});
+        }
+    });
 
 router.post('/getProfile',(req,res,next)=>{
     Registration.find({_id:ObjectId(req.body.id)},(err,docs)=>{

@@ -8,6 +8,7 @@ declare var $ :any;
 
 
 
+
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
@@ -21,9 +22,7 @@ export class ContactsComponent implements OnInit {
 edit={};
 new={};
 btnName:String;
-
 contactsLists:Contacts[];
-
 editBtn:Boolean;
 updateBtn:Boolean;
 
@@ -82,7 +81,8 @@ updateBtn:Boolean;
       this.ngOnInit();      
       //var element = document.getElementById("modalClose") as any;
       //element.click();     
-      alert('Updated Succesfully');
+      bootbox.alert("This is the default alert!");
+      //alert('Updated Succesfully');
     })   
     }    
     $('#modalClose').click();

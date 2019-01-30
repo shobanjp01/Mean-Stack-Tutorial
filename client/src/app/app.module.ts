@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { ContactsComponent} from './contacts/contacts.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
-import * as bootbox from 'node_modules/bootbox/bootbox.js';
+//import * as bootbox from 'node_modules/bootbox/bootbox.js';
 import { NavbarHeaderComponent } from './navbar-header/navbar-header.component';
 
 
@@ -28,7 +28,6 @@ import { NavbarHeaderComponent } from './navbar-header/navbar-header.component';
     HttpModule,
     AppRoutingModule,
     FormsModule
-   
     ],
   providers: [],
   bootstrap: [AppComponent]
