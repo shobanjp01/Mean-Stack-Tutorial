@@ -114,17 +114,51 @@
             <div class="">                           
                   <div class="form-group">
                     <label>First Name</label>
-                    <input type="text" [(ngModel)]="edit.firstName" name="firstName1"  class="form-control" required> 
+                    <input type="text" [(ngModel)]="edit.firstName" name="firstName" minlength="4" #firstNames="ngModel"  class="form-control" required> 
                   </div>
+                  <div class="form-group">
+                      <div *ngIf="firstNames.invalid && firstNames.touched"
+                          class="alert alert-danger">
+                        <div *ngIf="firstNames.errors.required">
+                          * Firstname is required.
+                        </div>                        
+                        <div *ngIf="firstNames.errors.minlength">
+                          * Firstname must be at least 4 characters long.
+                         </div>                   
+                      </div>
+                    </div>
                   <div class="form-group">
                     <label>Last Name</label>
-                    <input type="text" [(ngModel)]="edit.lastName"  name="lastName1" class="form-control" required>
+                    <input type="text" [(ngModel)]="edit.lastName" name="lastName" #lastNames="ngModel" class="form-control" required>
                   </div>
                   <div class="form-group">
+                      <div *ngIf="lastNames.invalid && lastNames.touched"
+                          class="alert alert-danger">
+                        <div *ngIf="lastNames.errors.required">
+                          * Lastname is required.
+                        </div>                                                               
+                      </div>
+                    </div>
+                  <div class="form-group">
                     <label>Contact</label>
-                    <input type="text" [(ngModel)]="edit.contact"  name="contact1" class="form-control" required>
+                    <input type="text" [(ngModel)]="edit.contact" minlength="10" maxlength="10" (keypress)="keyPress($event)"  name="contact" #contacts="ngModel" class="form-control" required>
                     <input type="hidden" [(ngModel)]="edit.id"  name="id1" >
-                  </div>                                
+                  </div>    
+                  
+                  <div class="form-group">
+                      <div *ngIf="contacts.invalid && contacts.touched"
+                          class="alert alert-danger">
+                          <div *ngIf="contacts.errors.required">
+                               * Contact is required.
+                             </div>  
+                          <!-- <div *ngIf="contacts.invalid&&contacts.dirty">
+                               * Only numbers allowed.
+                            </div>                                     -->
+                        <div *ngIf="contacts.errors.maxlength||contacts.errors.minlength">
+                            * Contact must be only 10 digits.
+                         </div>                   
+                      </div>
+                    </div>
               </div>
         </div>
         

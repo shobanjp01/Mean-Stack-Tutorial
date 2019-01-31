@@ -1,9 +1,11 @@
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import {ContactService} from '../contact.service';
 import {Contacts} from '../contact';
 import {Router} from '@angular/router';
-import * as bootbox from 'node_modules/bootbox/bootbox.js';
+//import * as bootbox from 'node_modules/bootbox/bootbox.js';
 declare var jquery:any;
+declare var bootbox:any;
 declare var $ :any;
 
 
@@ -31,9 +33,12 @@ updateBtn:Boolean;
 
 
   constructor(private contactService:ContactService,private router:Router) { }
-
+  validatingForm: FormGroup;
   ngOnInit() {
-    //console.log(sessionStorage.getItem('email') +","+sessionStorage.getItem('id'));    
+    // this.validatingForm = new FormGroup({
+    //   required: new FormControl(null, Validators.required)
+    // });
+        
     this.contactService.getAllContact()
     .subscribe(contacts=>{
       this.contactsLists=contacts;
@@ -45,6 +50,18 @@ updateBtn:Boolean;
         //$('#contactTable').wrap('<div class="dataTables_scroll" />');
         }, 50);         
     })
+  }
+  // get input() { 
+  //   return this.validatingForm.get('required'); 
+  // }
+
+  keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
 
   addContact(){
@@ -72,7 +89,7 @@ updateBtn:Boolean;
       .subscribe(res=>{
         this.contactsLists.push(res);
         this.ngOnInit();
-        alert('Added Succesfully');        
+        bootbox.alert('Added Succesfully');        
       })
     }
     else{
@@ -83,8 +100,7 @@ updateBtn:Boolean;
       this.ngOnInit();      
       //var element = document.getElementById("modalClose") as any;
       //element.click();     
-      bootbox.alert("This is the default alert!");
-      //alert('Updated Succesfully');
+      bootbox.alert("Updated Succesfully");     
     })   
     }    
     $('#modalClose').click();
@@ -92,12 +108,9 @@ updateBtn:Boolean;
     this.edit={};
   }
 
-  deleteContact(id:any){
-    var r = confirm("Are you sure, you want to delete?");
-    if(r==true){
-    var contacts=this.contactsLists;
-    this.contactService.deleteContact(id)
-    .subscribe(res=>{
+deleteFunction(contacts,id){
+  this.contactService.deleteContact(id)
+          .subscribe(res=>{
       if(res.n==1){
         for(var i=0;i<contacts.length;i++){
           if(contacts[i]._id==id){            
@@ -109,11 +122,20 @@ updateBtn:Boolean;
               });
               //$('#contactTable').wrap('<div class="dataTables_scroll" />');
               }, 50);               
-            alert("Deleted Successfully");
+            bootbox.alert("Deleted Successfully");
           }
         }
       }
     })
-  }    
+}
+
+
+  deleteContact(id:any){
+    var contacts=this.contactsLists;
+    bootbox.confirm("<label>Are you sure, you want to delete?</label>",(result)=>{
+      if(result==true){          
+        this.deleteFunction(contacts,id);
+      }   
+    });    
   }
 }

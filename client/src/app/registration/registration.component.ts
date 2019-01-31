@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {RegistrationService} from '../registration.service';
 import {Registers} from '../contact';
 import {ProfileService,EditProfile} from '../profile.service';
-
+import * as CryptoJS from 'crypto-js';
 declare var jquery:any;
 declare var $ :any;
 
@@ -52,7 +52,7 @@ export class RegistrationComponent implements OnInit {
     this.router.navigate(['login']);
   }
   
-  newUser(){      
+  newUser(){
     console.log(this.profile);
     this.registrationService.registration(this.profile)
     .subscribe(res=>{     
